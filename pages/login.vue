@@ -1,25 +1,25 @@
 <script lang="ts" setup>
-const loading = ref(false)
+let loginLoading = ref(false)
 
 definePageMeta({
   layout: "form-focus",
 });
 
-const form = reactive({
+const loginForm = reactive({
   email:"",
   password:""
 })
 
 async function handleLogin(){
   try{
-    loading.value = true
-    console.log("login button was hit",form)
+    loginLoading.value = true
+    console.log("login button was hit",loginForm)
   }
   catch(e){
     alert("Error logging into the site check for username and password")
   }
   finally{
-    loading.value = false
+    loginLoading.value = false
   }
 }
 </script>
@@ -31,21 +31,20 @@ async function handleLogin(){
     type="form"
     submit-label="Login"
     @submit="handleLogin"
-    v-model="form"
+    v-model="loginForm"
     >
-    <FormKit 
-    name="email"
-    label="Email address"
-    validation="required|email"
-    />
+      <FormKit 
+      name="email"
+      label="Email address"
+      validation="required|email"
+      />
 
-    <FormKit 
-    type="password"
-    label="password"
-    name="password"
-    validation="required"
-    />
-
+      <FormKit 
+      type="password"
+      label="password"
+      name="password"
+      validation="required"
+      />
     </FormKit>
   </div>
 </template>
